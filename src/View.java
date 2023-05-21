@@ -4,7 +4,7 @@ public class View {
      */
     public void View(){
         IU.crearVentana();
-        Dialogo.ventanaDialogo();
+        //Dialogo.mostrarCoche();
     }
 
     /**
@@ -13,8 +13,9 @@ public class View {
      * @param v velocidad
      * @return true
      */
-    boolean muestraVelocidad(String matricula, Integer v){
+    boolean mostrarVelocidad(String matricula, Integer v){
         System.out.println(matricula + ": " + v + "km/hr");
+        Dialogo.crearDialogo(String.valueOf(v));
         return true;
     }
 }

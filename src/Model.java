@@ -54,7 +54,7 @@ public class Model {
      */
 
 
-    public Integer subirVelocidad(String matricula,int v){
+    public Integer aumentarVelocidad(String matricula, int v){
 
         getCoche(matricula).velocidad=v+getCoche(matricula).velocidad;
 
@@ -69,7 +69,7 @@ public class Model {
      * @param v km/h que queremos reducir de velocidad
      * @return la velocidad actualizada
      */
-    public Integer bajarVelocidad(String matricula,int v){
+    public Integer reducirVelocidad(String matricula, int v){
 
         getCoche(matricula).velocidad=getCoche(matricula).velocidad-v;
 

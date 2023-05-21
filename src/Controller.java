@@ -22,7 +22,7 @@ public class Controller {
     public static void crearCoche(String modelo, String matricula) {
         Coche aux = miModelo.crearCoche(modelo, matricula);
         if (aux != null) {
-            miVista.muestraVelocidad(aux.matricula, aux.velocidad);
+            miVista.mostrarVelocidad(aux.matricula, aux.velocidad);
         }
 
 
@@ -33,19 +33,19 @@ public class Controller {
      * @param matricula del coche
      * @param v velocidad a reducir
      */
-    public static void bajarVelocidad(String matricula,int v){
-        int aux = miModelo.bajarVelocidad(matricula,v);
-        miVista.muestraVelocidad(matricula,aux);
+    public static void reducirVelocidad(String matricula, int v){
+        int aux = miModelo.reducirVelocidad(matricula,v);
+        miVista.mostrarVelocidad(matricula,aux);
     }
     /**
      * Metodo que llamando a Model aumenta la velocidad y que llamando al View nos lo muestra por pantalla
      * @param matricula del coche
      * @param v velocidad a aumentar
      */
-    public static void subirVelocidad(String matricula,int v){
+    public static void aumentarVelocidad(String matricula, int v){
 
-        int aux = miModelo.subirVelocidad(matricula,v);
-        miVista.muestraVelocidad(matricula,aux);
+        int aux = miModelo.aumentarVelocidad(matricula,v);
+        miVista.mostrarVelocidad(matricula,aux);
     }
 
 

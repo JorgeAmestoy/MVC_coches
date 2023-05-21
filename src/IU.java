@@ -28,13 +28,13 @@ public class IU {
         bAumentar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Controller.subirVelocidad(tMatricula.getText(),20);
+                Controller.aumentarVelocidad(tMatricula.getText(),20);
             }
         });
         bReducir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Controller.bajarVelocidad(tMatricula.getText(),20);
+                Controller.reducirVelocidad(tMatricula.getText(),20);
             }
         });
 
@@ -47,7 +47,6 @@ public class IU {
     public static void crearVentana() {
         JFrame frame = new JFrame("Ventana Coches");
         frame.setContentPane(new IU().panel1);
-        frame.setDefaultCloseOperation(3);
         frame.pack();
         frame.setVisible(true);
     }

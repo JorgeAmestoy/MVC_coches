@@ -18,11 +18,12 @@ public class Dialogo extends JDialog {
      * Metodo en el que instancio ventana
      *
      */
-    public static void ventanaDialogo() {
+    public static void crearDialogo(String mensaje) {
         Dialogo dialogo = new Dialogo();
         dialogo.pack();
-        dialogo.eVelocidad.setText("COCHES");
+        dialogo.eVelocidad.setText(mensaje);
         dialogo.setVisible(true);
+
 
     }
 }
