@@ -45,7 +45,7 @@ public class IU {
      * Metodo en el que instancio la ventana
      */
     public static void crearVentana() {
-        JFrame frame = new JFrame("Ventana Coches");
+        JFrame frame = new JFrame("COCHES");
         frame.setContentPane(new IU().panel1);
         frame.pack();
         frame.setVisible(true);
