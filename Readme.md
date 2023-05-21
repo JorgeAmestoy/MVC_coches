@@ -1,6 +1,6 @@
 # Arquitectura MVC
 
-Aplicación que trabaja con objetos coches, modifica la velocidad y la muestra
+Aplicación que trabaja con objetos coches, los crea, modifica la velocidad y la muestra
 
 ---
 ## Diagrama de clases:
@@ -27,9 +27,18 @@ classDiagram
           
           
       }
+      class IU{
+      +crearVentana()
+      }
+      class Dialogo{
+      +crearDialogo()
+      }
     Controller "1" *-- "1" Model : association
     Controller "1" *-- "1" View : association
     Model "1" *-- "1..n" Coche : association
+    View "1" *-- "1..1" IU : association
+    View "1" *-- "1..1" Dialogo : association
+    
       
 ```
 
@@ -37,7 +46,7 @@ classDiagram
 
 ## Diagrama de Secuencia
 
-Ejemplo básico del procedimiento, sin utilizar los nombres de los métodos
+Ejemplo básico del procedimiento
 
 
 ```mermaid
@@ -45,39 +54,90 @@ sequenceDiagram
     participant Model
     participant Controller
     participant View
+    actor User    
+    
+    User->>View: Crea un coche
+    activate View
+    View-->>Controller: User quiere crear un coche
+    activate Controller    
     Controller->>Model: Puedes crear un coche?
     activate Model
-    Model-->>Controller: Creado!
-    deactivate Model
-    Controller->>+View: Muestra la velocidad, porfa
-    activate View
-    View->>-View: Mostrando velocidad
-    View-->>Controller: Listo!
+    Model-->>Controller: Toma el coche
+    Deactivate Model
+    Controller-->>View: Coche creado
+    deactivate Controller
+    View-->>User: El coche se ha creado
     deactivate View
+    
+    User->>View: Quiero aumentar la velocidad
+    activate View
+    View-->>Controller: User quiere aumentar la velocidad
+    activate Controller
+    Controller->>Model: Puedes aumentar la velocidad?
+    activate Model
+    Model-->>Controller: Toma la velocidad aumentada
+    deactivate Model
+    Controller-->>View: Velocidad aumentada
+    deactivate Controller
+    View-->>User: La velocidad de tu coche se ha aumentado
+    deactivate View
+    
+    User->>View: Quiero reducir la velocidad
+    activate View
+    View-->>Controller: User quiere reducir la velocidad
+    activate Controller
+    Controller->>Model: Puedes reducir la velocidad?
+    activate Model
+    Model-->>Controller: Toma la velocidad reducida
+    deactivate Model
+    Controller-->>View: Velocidad reducida
+    deactivate Controller
+    View-->>User: La velocidad de tu coche se ha reducido
+    deactivate View
+
 ```
 
-El mismo diagrama con los nombres de los métodos
+Mismo diagrama con los nombres de los métodos
 
 ```mermaid
 sequenceDiagram
-    participant Model
-    participant Controller
+actor User
+    participant IU
+    participant Dialogo
     participant View
-    Controller->>Model: crearCoche("Mercedes", "BXK 1234")
+    participant Controller
+    participant Model    
+    User-->>IU: Crea un coche
+    IU-->Controller: crearCoche(modelo,matricula)
+    activate Controller
+    Controller->>Model: crearCoche(modelo,matricula)
     activate Model
     Model-->>Controller: Coche
     deactivate Model
-    Controller->>Model: subirVelocidad("SBC 1234", velocidad)
+    Controller-->>+View: mostrarVelocidad(matricula,velocidad)
+    deactivate Controller
+    View-->>-Dialogo: mostrarVelocidad(matricula,velocidad)    
+    User-->>IU: Aumenta velocidad del coche
+    IU-->Controller: aumentarVelocidad(modelo,matricula)
+    activate Controller
+    Controller->>Model: aumentarVelocidad(modelo,matricula)
     activate Model
-    Model-->>Controller: velocidad aumentada
+    Model-->>Controller: Coche
     deactivate Model
-    Controller->>Model: bajarVelocidad("SBC 1234", velocidad)
+    Controller-->>+View: mostrarVelocidad(matricula,velocidad)
+    deactivate Controller
+    View-->>-Dialogo: mostrarVelocidad(matricula,velocidad)    
+    User-->>IU: Reduce velocidad del coche
+    IU-->Controller: reducirVelocidad(modelo,matricula)
+    activate Controller
+    Controller->>Model: reducirVelocidad(modelo,matricula)
     activate Model
-    Model-->>Controller: velocidad reducida
+    Model-->>Controller: Coche
     deactivate Model
-    Controller->>+View: muestraVelocidad("BXK 1234", velocidad)
-    activate View
-    View->>-View: System.out.println()
-    View-->>Controller: boolean
-    deactivate View
+    Controller-->>+View: mostrarVelocidad(matricula,velocidad)
+    deactivate Controller
+    View-->>-Dialogo: mostrarVelocidad(matricula,velocidad)
+    
+    
+   
 ```
