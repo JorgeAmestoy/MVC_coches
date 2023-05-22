@@ -1,8 +1,8 @@
 public class View {
     /**
-     * Metodo con el que llamo al jframe y dialogo para crear y mostrar las ventanas     *
+     * Constructor de la ventana
      */
-    public void View(){
+    public static void crearVentana(){
         IU.crearVentana();
         //Dialogo.mostrarCoche();
     }
@@ -13,7 +13,7 @@ public class View {
      * @param v velocidad
      * @return true
      */
-    boolean mostrarVelocidad(String matricula, Integer v){
+   public static boolean mostrarVelocidad(String matricula, Integer v){
         System.out.println(matricula + ": " + v + "km/hr");
         Dialogo.crearDialogo(String.valueOf(v));
         return true;

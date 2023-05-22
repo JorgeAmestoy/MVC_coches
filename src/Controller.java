@@ -1,16 +1,14 @@
 public class Controller {
 
-   static Model miModelo = new Model();
-   static View miVista = new View();
+
 
     /**
-     * Metodo main con el que llamo a la vista para visualizar ventana y dialogo
+     * Metodo main con el que llamo a la vista para visualizar ventana
      * @param args
      */
     public static void main(String[] args) {
 
-        miVista.View();
-
+        View.crearVentana();
 
     }
 
@@ -20,9 +18,10 @@ public class Controller {
      * @param matricula del coche
      */
     public static void crearCoche(String modelo, String matricula) {
-        Coche aux = miModelo.crearCoche(modelo, matricula);
+        Coche aux = Model.crearCoche(modelo, matricula);
         if (aux != null) {
-            miVista.mostrarVelocidad(aux.matricula, aux.velocidad);
+            View.mostrarVelocidad(aux.matricula, aux.velocidad);
+
         }
 
 
@@ -34,8 +33,8 @@ public class Controller {
      * @param v velocidad a reducir
      */
     public static void reducirVelocidad(String matricula, int v){
-        int aux = miModelo.reducirVelocidad(matricula,v);
-        miVista.mostrarVelocidad(matricula,aux);
+        int aux = Model.reducirVelocidad(matricula,v);
+        View.mostrarVelocidad(matricula,aux);
     }
     /**
      * Metodo que llamando a Model aumenta la velocidad y que llamando al View nos lo muestra por pantalla
@@ -44,8 +43,8 @@ public class Controller {
      */
     public static void aumentarVelocidad(String matricula, int v){
 
-        int aux = miModelo.aumentarVelocidad(matricula,v);
-        miVista.mostrarVelocidad(matricula,aux);
+        int aux = Model.aumentarVelocidad(matricula,v);
+        View.mostrarVelocidad(matricula,aux);
     }
 
 

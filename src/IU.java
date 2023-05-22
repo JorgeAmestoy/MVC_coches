@@ -49,6 +49,7 @@ public class IU {
         frame.setContentPane(new IU().panel1);
         frame.pack();
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(3);//deja de runnear la app
     }
 
 

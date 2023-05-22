@@ -15,7 +15,7 @@ public class Dialogo extends JDialog {
     }
 
     /**
-     * Metodo en el que instancio ventana
+     * Metodo en el que instancio la ventana dialogo
      *
      */
     public static void crearDialogo(String mensaje) {
