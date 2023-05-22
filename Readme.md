@@ -106,6 +106,8 @@ actor User
     participant View
     participant Controller
     participant Model    
+    
+    
     User-->>IU: Crea un coche
     IU-->Controller: crearCoche(modelo,matricula)
     activate Controller
@@ -115,27 +117,29 @@ actor User
     deactivate Model
     Controller-->>+View: mostrarVelocidad(matricula,velocidad)
     deactivate Controller
-    View-->>-Dialogo: mostrarVelocidad(matricula,velocidad)    
+    View-->>-Dialogo: mostrarVelocidad(matricula,velocidad)  
+      
     User-->>IU: Aumenta velocidad del coche
-    IU-->Controller: aumentarVelocidad(modelo,matricula)
+    IU-->Controller: aumentarVelocidad(matricula,velocidad)
     activate Controller
-    Controller->>Model: aumentarVelocidad(modelo,matricula)
+    Controller->>Model: aumentarVelocidad(matricula,velocidad)
     activate Model
-    Model-->>Controller: Coche
+    Model-->>Controller: Coche con velocidad aumentada
     deactivate Model
     Controller-->>+View: mostrarVelocidad(matricula,velocidad)
     deactivate Controller
-    View-->>-Dialogo: mostrarVelocidad(matricula,velocidad)    
+    View-->>-Dialogo: crearDialogo(mensaje) 
+       
     User-->>IU: Reduce velocidad del coche
-    IU-->Controller: reducirVelocidad(modelo,matricula)
+    IU-->Controller: reducirVelocidad(matricula,velocidad)
     activate Controller
-    Controller->>Model: reducirVelocidad(modelo,matricula)
+    Controller->>Model: reducirVelocidad(matricula,velocidad)
     activate Model
-    Model-->>Controller: Coche
+    Model-->>Controller: Coche con velocidad reducida
     deactivate Model
     Controller-->>+View: mostrarVelocidad(matricula,velocidad)
     deactivate Controller
-    View-->>-Dialogo: mostrarVelocidad(matricula,velocidad)
+    View-->>-Dialogo: crearDialogo(mensaje)
     
     
    
