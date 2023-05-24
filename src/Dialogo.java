@@ -21,7 +21,7 @@ public class Dialogo extends JDialog {
     public static void crearDialogo(String mensaje) {
         Dialogo dialogo = new Dialogo();
         dialogo.pack();
-        dialogo.eVelocidad.setText("La velocidad es: "+mensaje);
+        dialogo.eVelocidad.setText(mensaje);
         dialogo.setVisible(true);
 
 
