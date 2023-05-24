@@ -51,12 +51,16 @@ public class Controller {
      * Metodo que busca un coche
      * @param matricula del coche que queremos buscar
      */
-    public static void buscarCoche(String matricula){
-
-        Model.getCoche(matricula);
-
+    public static Coche buscarCoche(String matricula){
+       Coche auxCoche = Model.getCoche(matricula);
+       if(auxCoche!=null){
+           View.mostrarCoche(auxCoche.matricula, auxCoche.modelo, auxCoche.velocidad);
+       }
+       return auxCoche;
 
     }
+
+
 
 
 }
