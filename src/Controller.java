@@ -47,5 +47,21 @@ public class Controller {
         View.mostrarVelocidad(matricula,aux);
     }
 
+    /**
+     * Metodo que busca el coche
+     * @param matricula del coche a buscar
+     * @return coche
+     */
+    public static Coche buscarCoche(String matricula){
+       Coche auxCoche = Model.getCoche(matricula);
+       if(auxCoche!=null){
+           View.mostrarCoche(auxCoche.matricula, auxCoche.modelo, auxCoche.velocidad);
+       }
+       return auxCoche;
+
+    }
+
+
+
 
 }

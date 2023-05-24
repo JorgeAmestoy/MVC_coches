@@ -11,6 +11,7 @@ public class IU {
     private JLabel eMatricula;
     private JTextField tModelo;
     private JTextField tMatricula;
+    private JButton bBuscarCoche;
 
     /**
      * Constructor de la clase IU para inicializar botones y poder usar actionListener
@@ -20,6 +21,7 @@ public class IU {
         bCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Controller.crearCoche(tModelo.getText(), tMatricula.getText());
 
 
@@ -27,14 +29,22 @@ public class IU {
         });
         bAumentar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 Controller.aumentarVelocidad(tMatricula.getText(),20);
             }
         });
         bReducir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Controller.reducirVelocidad(tMatricula.getText(),20);
+            }
+        });
+        bBuscarCoche.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Controller.buscarCoche(tMatricula.getText());
             }
         });
 

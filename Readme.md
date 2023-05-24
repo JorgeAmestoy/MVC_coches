@@ -1,6 +1,6 @@
 # Arquitectura MVC
 
-Aplicación que trabaja con objetos coches, los crea, modifica la velocidad y la muestra
+Aplicación que trabaja con objetos coches, los crea, modifica la velocidad, los busca y lo muestra
 
 ---
 ## Diagrama de clases:
@@ -15,14 +15,16 @@ classDiagram
       class Controller{
           +main()
       }
-      class View {+muestraVelocidad(String, Integer)}
+      class View {+muestraVelocidad(String, Integer)
+      +mostrarCoche(String,String,Integer)
+      }
       class Model {
           ArrayList~Coche~: parking
           +crearCoche(String, String, String)
           +getCoche(String)
           +subirVelocidad(String, Integer)
           +bajarVelocidad(String, Integer)
-          +getVelocidad(String)
+          +getVelocidad(String)          
           
           
       }
@@ -93,6 +95,21 @@ sequenceDiagram
     deactivate Controller
     View-->>User: La velocidad de tu coche se ha reducido
     deactivate View
+    
+    User->>View: Quiero buscar un coche
+    activate View
+    View-->>Controller: User quiere buscar un coche
+    activate Controller
+    Controller->>Model: Puedes buscar el coche?
+    activate Model
+    Model-->>Controller: Toma el coche
+    deactivate Model
+    Controller-->>View: Coche
+    deactivate Controller
+    View-->>User: Aqui tienes tu coche
+    deactivate View
+    
+    
 
 ```
 
@@ -138,6 +155,17 @@ actor User
     Model-->>Controller: Coche con velocidad reducida
     deactivate Model
     Controller-->>+View: mostrarVelocidad(matricula,velocidad)
+    deactivate Controller
+    View-->>-Dialogo: crearDialogo(mensaje)
+    
+     User-->>IU: Busca el coche
+    IU-->Controller: buscarCoche(matricula)
+    activate Controller
+    Controller->>Model: getCoche(matricula)
+    activate Model
+    Model-->>Controller: Coche encontrado
+    deactivate Model
+    Controller-->>+View: mostrarCoche(matricula,modelo,velocidad)
     deactivate Controller
     View-->>-Dialogo: crearDialogo(mensaje)
     
