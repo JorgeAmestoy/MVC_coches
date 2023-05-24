@@ -18,4 +18,20 @@ public class View {
         Dialogo.crearDialogo(String.valueOf(v));
         return true;
     }
+
+    /**
+     * Metodo que muestra el coche buscado
+     * @param matricula del coche buscado
+     * @param modelo del coche
+     * @param v velocidad del coche
+     * @return true
+     */
+    public static boolean mostrarCoche(String matricula, String modelo, Integer v){
+       String msg = "Coche con matricula: "+matricula+ "Modelo: "+modelo+ " velocidad: "+v+ " km/h";
+        System.out.println(msg);
+        Dialogo.crearDialogo(msg);
+        return true;
+    }
+
+
 }
