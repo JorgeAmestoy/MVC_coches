@@ -27,7 +27,7 @@ public class View {
      * @return true
      */
     public static boolean mostrarCoche(String matricula, String modelo, Integer v){
-       String msg = "Coche con matricula: "+matricula+ "Modelo: "+modelo+ " velocidad: "+v+ " km/h";
+       String msg = "Coche con matricula: "+matricula+ ", Modelo: "+modelo+ " y Velocidad: "+v+ " km/h";
         System.out.println(msg);
         Dialogo.crearDialogo(msg);
         return true;
