@@ -81,6 +81,7 @@ public class Model {
      * @return velocidad según el coche
      */
     public static Integer getVelocidad(String matricula) {
+
         return getCoche(matricula).velocidad;
     }
 }
