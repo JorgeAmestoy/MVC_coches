@@ -41,7 +41,7 @@ public class Controller {
      * @param matricula del coche
      * @param v velocidad a reducir
      */
-    public static void reducirVelocidad(String matricula, int v){
+    public static void reducirVelocidad(String matricula, Integer v){
         miModelo.reducirVelocidad(matricula,v);
     }
     /**
@@ -49,7 +49,7 @@ public class Controller {
      * @param matricula del coche
      * @param v velocidad a aumentar
      */
-    public static void aumentarVelocidad(String matricula, int v){
+    public static void aumentarVelocidad(String matricula, Integer v){
 
         miModelo.reducirVelocidad(matricula,v);
     }

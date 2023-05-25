@@ -70,7 +70,7 @@ public class Model extends Observable {
      */
     public void aumentarVelocidad(String matricula, Integer v){
         //busca el coche y aumenta la velocidad
-       getCoche(matricula).velocidad = getCoche(matricula).velocidad+v;
+       getCoche(matricula).velocidad = getCoche(matricula).velocidad + v;
        //anotamos cambio
        setChanged();
        //notifico a los observadores del cambio
@@ -91,7 +91,7 @@ public class Model extends Observable {
        //anotamos el cambio
        setChanged();
        //notificamos a los observadores del cambio
-       notifyObservers(matricula);
+       notifyObservers(getCoche(matricula));
 
     }
 
