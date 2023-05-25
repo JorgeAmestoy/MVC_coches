@@ -1,12 +1,24 @@
-# Arquitectura MVC
+# Arquitectura MVC con Patrón Observer
 
-Aplicación que trabaja con objetos coches, los crea, modifica la velocidad y la muestra
+En esta rama utilizaremos el patrón Observer
+
+Los cambios de la velocidad que se hagan en el model serán observados por el Controller.
+
+Para notificar a los observadores hacemos dos pasos:
+- Actualizamos el estado de 'algo a cambiado' con `setChange()`
+- Notificamos a los observadores `notifyObservers(valor)`
+
+De esta manera se dispara en todos los observadores el método `update()`
 
 ---
 ## Diagrama de clases:
 
 ```mermaid
 classDiagram
+    class Observable{
+        +setChanged()
+        +notifyObserver(valor)
+    }
     class Coche {
         String: matricula
         String: modelo
@@ -15,132 +27,177 @@ classDiagram
       class Controller{
           +main()
       }
-      class View {+muestraVelocidad(String, Integer)}
+      class View {+mostrarVelocidad(String, Integer)}
       class Model {
           ArrayList~Coche~: parking
           +crearCoche(String, String, String)
           +getCoche(String)
-          +subirVelocidad(String, Integer)
-          +bajarVelocidad(String, Integer)
+          +aumentarVelocidad(String, Integer)
+          +reducirVelocidad(String, Integer)
           +getVelocidad(String)
-          
-          
       }
-      class IU{
-      +crearVentana()
+      class IU {
+          +crearVentana()
       }
-      class Dialogo{
-      +crearDialogo()
+      class Dialogo {
+          +crearDialogo()
       }
+      class ObserverVelocidad {
+      +update()
+      }
+    Controller "1" *-- "1" ObserverVelocidad : association
     Controller "1" *-- "1" Model : association
     Controller "1" *-- "1" View : association
     Model "1" *-- "1..n" Coche : association
-    View "1" *-- "1..1" IU : association
+    View "1" *-- "1..1" IU: association
     View "1" *-- "1..1" Dialogo : association
-    
+    Observable<|--Model
       
 ```
 
 ---
 
 ## Diagrama de Secuencia
-
-Ejemplo básico del procedimiento
-
-
+### Evento en el View
+El observer está para controlar el cambio de velocidad
 ```mermaid
 sequenceDiagram
-    participant Model
-    participant Controller
+    actor User
     participant View
-    actor User    
+    participant Controller
+    participant ObserverVelocidad
+    participant Model
     
-    User->>View: Crea un coche
+    User-->>View: Crea un coche
     activate View
     View-->>Controller: User quiere crear un coche
-    activate Controller    
+    activate Controller
     Controller->>Model: Puedes crear un coche?
     activate Model
-    Model-->>Controller: Toma el coche
-    Deactivate Model
+    Model-->>Controller: Coche
+    deactivate Model
     Controller-->>View: Coche creado
     deactivate Controller
     View-->>User: El coche se ha creado
     deactivate View
     
-    User->>View: Quiero aumentar la velocidad
+    User-->>View: User quiere aumentar la velocidad
     activate View
     View-->>Controller: User quiere aumentar la velocidad
     activate Controller
     Controller->>Model: Puedes aumentar la velocidad?
     activate Model
-    Model-->>Controller: Toma la velocidad aumentada
+    Model-->>ObserverVelocidad: Notificación de aumento de velocidad
     deactivate Model
-    Controller-->>View: Velocidad aumentada
+    activate ObserverVelocidad
+    ObserverVelocidad-->>+View: Muestra la velocidad
+    deactivate ObserverVelocidad
     deactivate Controller
-    View-->>User: La velocidad de tu coche se ha aumentado
+    View-->>User: El coche ha aumentado su velocidad
     deactivate View
     
-    User->>View: Quiero reducir la velocidad
+    User-->>View: User quiere reducir la velocidad
     activate View
     View-->>Controller: User quiere reducir la velocidad
     activate Controller
     Controller->>Model: Puedes reducir la velocidad?
     activate Model
-    Model-->>Controller: Toma la velocidad reducida
+    Model-->>ObserverVelocidad: Notificación de reducción de velocidad
     deactivate Model
-    Controller-->>View: Velocidad reducida
+    activate ObserverVelocidad
+    ObserverVelocidad-->>+View: Muestra la velocidad
+    deactivate ObserverVelocidad
     deactivate Controller
-    View-->>User: La velocidad de tu coche se ha reducido
+    View-->>User: El coche ha reducido su velocidad!
     deactivate View
-
 ```
 
-Mismo diagrama con los nombres de los métodos
-
+El mismo diagrama con los nombres de los métodos
 ```mermaid
 sequenceDiagram
-actor User
-    participant IU
-    participant Dialogo
-    participant View
-    participant Controller
-    participant Model    
-    
-    
-    User-->>IU: Crea un coche
+actor User    
+participant IU
+participant Dialogo
+participant View
+participant Controller
+participant ObserverVelocidad
+participant Model
+
+    User-->>IU: User quiere crear un coche
     IU-->Controller: crearCoche(modelo,matricula)
     activate Controller
-    Controller->>Model: crearCoche(modelo,matricula)
+    Controller->>Model: crearCoche(modelo, matricula)
     activate Model
     Model-->>Controller: Coche
     deactivate Model
-    Controller-->>+View: mostrarVelocidad(matricula,velocidad)
-    deactivate Controller
-    View-->>-Dialogo: mostrarVelocidad(matricula,velocidad)  
-      
-    User-->>IU: Aumenta velocidad del coche
-    IU-->Controller: aumentarVelocidad(matricula,velocidad)
-    activate Controller
-    Controller->>Model: aumentarVelocidad(matricula,velocidad)
-    activate Model
-    Model-->>Controller: Coche con velocidad aumentada
-    deactivate Model
-    Controller-->>+View: mostrarVelocidad(matricula,velocidad)
-    deactivate Controller
-    View-->>-Dialogo: crearDialogo(mensaje) 
-       
-    User-->>IU: Reduce velocidad del coche
-    IU-->Controller: reducirVelocidad(matricula,velocidad)
-    activate Controller
-    Controller->>Model: reducirVelocidad(matricula,velocidad)
-    activate Model
-    Model-->>Controller: Coche con velocidad reducida
-    deactivate Model
-    Controller-->>+View: mostrarVelocidad(matricula,velocidad)
+    Controller-->>+View: mostrarVelocidad(matricula, velocidad)
     deactivate Controller
     View-->>-Dialogo: crearDialogo(mensaje)
     
+    User-->>IU: User quiere subir la velocidad del coche
+    IU-->>Controller: aumentarVelocidad(matricula,velocidad)
+    activate Controller
+    Controller->>Model: aumentarVelocidad(matricula,velocidad)
+    activate Model
+    Model-->>ObserverVelocidad: update()
+    deactivate Model
+    activate ObserverVelocidad
+    ObserverVelocidad-->>+View: mostrarVelocidad(matricula, velocidad)
+    deactivate ObserverVelocidad
+    deactivate Controller
+    View-->>-Dialogo: crearDialogo(mensaje)
     
-   
+    User-->>IU: User quiere bajar la velocidad del coche
+    IU-->>Controller: reducirVelocidad(matricula,velocidad)
+    activate Controller
+    Controller->>Model: reducirVelocidad(matricula,velocidad)
+    activate Model
+    Model-->>ObserverVelocidad: update()
+    deactivate Model
+    activate ObserverVelocidad
+    ObserverVelocidad-->>+View: mostrarVelocidad(matricula, velocidad)
+    deactivate ObserverVelocidad
+    deactivate Controller
+    View-->>-Dialogo: crearDialogo(mensaje)
 ```
+
+Si sumamos otro observador, entonces el update() será en paralelo (par)
+a todos los Observadores.
+```mermaid
+sequenceDiagram
+participant View
+participant Controller
+participant ObserverVelocidad
+participant ObserverOtro
+participant Model
+
+    Controller->>Model: cambiarVelocidad()
+    activate Model
+    par notificacion
+        Model->>ObserverVelocidad: update()
+    and notificacion
+        Model->>ObserverOtro: update()
+        end
+    deactivate Model
+    activate ObserverVelocidad
+    activate ObserverOtro
+    ObserverVelocidad->>+View: mostrarVelocidad
+    deactivate ObserverVelocidad
+    ObserverOtro->>-ObserverOtro: sout
+    activate View
+    View->>-View: sout
+    deactivate View
+ ```
+    ---
+## Pasos para la configuración
+
+1. Model
+   * Extender `Observable` en `Model`
+   * En el método en donde ocurra el cambio:
+     * setChenged()
+     * notifyObserver(valor)
+2. Crear una clase que sea el observador, que implementa la interface `Observer`
+    * definir el método `update()`
+3. Controller
+    * Instanciar el observer, definido en el punto anterior
+    * Añadir este observer al observable con `addObserver()`
