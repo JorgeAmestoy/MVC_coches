@@ -55,7 +55,7 @@ public class Controller {
      */
     public static void aumentarVelocidad(String matricula, Integer v){
 
-        miModelo.reducirVelocidad(matricula,v);
+        miModelo.aumentarVelocidad(matricula,v);
     }
 
 
