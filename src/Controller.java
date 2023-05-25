@@ -17,6 +17,10 @@ public class Controller {
         //en miModelo
         miModelo.addObserver(observoVelocidad);
 
+       //instancio segundo observador
+       OtroObserver otroObservador = new OtroObserver();
+       miModelo.addObserver(otroObservador);
+
         View.crearVentana();
 
     }
