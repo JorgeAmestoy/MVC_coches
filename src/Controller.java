@@ -1,12 +1,21 @@
 public class Controller {
 
 
+    //creo una varibale de tipo Model para instanciar luego
+    static Model miModelo;
 
-    /**
-     * Metodo main con el que llamo a la vista para visualizar ventana
-     * @param args
-     */
+
     public static void main(String[] args) {
+
+        //instancio clase observable (Model)
+        miModelo = new Model();
+
+        //instanciamos el observador
+        ObserverVelocidad observoVelocidad = new ObserverVelocidad();
+        //añado observador al modelo para que
+        //que este nuevo objeto sea notificado de los cambios
+        //en miModelo
+        miModelo.addObserver(observoVelocidad);
 
         View.crearVentana();
 
@@ -33,8 +42,7 @@ public class Controller {
      * @param v velocidad a reducir
      */
     public static void reducirVelocidad(String matricula, int v){
-        int aux = Model.reducirVelocidad(matricula,v);
-        View.mostrarVelocidad(matricula,aux);
+        miModelo.reducirVelocidad(matricula,v);
     }
     /**
      * Metodo que llamando a Model aumenta la velocidad y que llamando al View nos lo muestra por pantalla
@@ -43,8 +51,7 @@ public class Controller {
      */
     public static void aumentarVelocidad(String matricula, int v){
 
-        int aux = Model.aumentarVelocidad(matricula,v);
-        View.mostrarVelocidad(matricula,aux);
+        miModelo.reducirVelocidad(matricula,v);
     }
 
 
