@@ -187,8 +187,7 @@ participant Model
     activate View
     View->>-View: sout
     deactivate View
- ```
-    ---
+ ```    
 ## Pasos para la configuración
 
 1. Model
