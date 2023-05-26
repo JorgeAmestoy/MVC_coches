@@ -16,7 +16,7 @@ public class ObserverVelocidad implements Observer {
     public void update(Observable o, Object arg) {
         //hay que castear el Objeto a tipo Coche
         Coche auxCoche = (Coche) arg;
-        System.out.println("Se ha cambiado la velocidad "+auxCoche.velocidad.toString());
+        System.out.println("Se ha cambiado la velocidad a"+auxCoche.velocidad.toString()+ "km/h");
         //llamamos a View para que muestra la velocidad
         View.mostrarVelocidad(auxCoche.matricula, auxCoche.velocidad);
 
