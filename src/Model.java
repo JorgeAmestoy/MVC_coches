@@ -63,10 +63,10 @@ public class Model extends Observable {
 
     /**
      * Metodo que aumenta la velocidad del coche
+     * y notifica al Observer
      *
      * @param matricula matricula del coche
      * @param v km/h que queremos aumentar de velocidad
-     * @return la velocidad actualizada
      */
     public void aumentarVelocidad(String matricula, Integer v){
         //busca el coche y aumenta la velocidad
@@ -81,9 +81,9 @@ public class Model extends Observable {
 
     /**
      * Metodo que reduce la velocidad del coche
+     * y notifica al Observer
      * @param matricula matricula del coche
      * @param v km/h que queremos reducir de velocidad
-     * @return la velocidad actualizada
      */
     public void reducirVelocidad(String matricula, Integer v){
         //busca el coche y aumenta la velocidad
