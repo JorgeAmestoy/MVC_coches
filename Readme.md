@@ -27,7 +27,8 @@ classDiagram
       class Controller{
           +main()
       }
-      class View {+mostrarVelocidad(String, Integer)}
+      class View {+mostrarVelocidad(String, Integer)
+      +mostrarVelocidad2(String, Integer)}
       class Model {
           ArrayList~Coche~: parking
           +crearCoche(String, String, String)
@@ -46,7 +47,7 @@ classDiagram
       +update()
       }
       class ObsExceso{
-      update()
+      +update()
       }
     Controller "1" *-- "1" ObserverVelocidad : association
     Controller "1" *-- "1" ObsExceso : association
@@ -70,7 +71,7 @@ sequenceDiagram
     participant View
     participant Controller
     participant ObserverVelocidad
-    participant ObsExceso
+    participant obsExceso
     participant Model
     
     User-->>View: Crea un coche
@@ -95,14 +96,14 @@ sequenceDiagram
     Model-->>ObserverVelocidad: Notificación de aumento de velocidad
     deactivate Model
     activate Model
-    Model-->>ObsExceso: Notificación de aumento de velocidad
+    Model-->>obsExceso: Notificación de aumento de velocidad
     deactivate Model
     activate ObserverVelocidad
     ObserverVelocidad-->>+View: Muestra la velocidad
     deactivate ObserverVelocidad
-    activate ObsExceso
-    ObsExceso-->>+View: Muestra la velocidad
-    deactivate ObsExceso
+    activate obsExceso
+    obsExceso-->>+View: Muestra la velocidad
+    deactivate obsExceso
     deactivate Controller
     View-->>User: El coche ha aumentado su velocidad
     deactivate View
@@ -156,14 +157,14 @@ participant Model
     Model-->>ObserverVelocidad: update()
     deactivate Model
     activate Model
-    Model-->>ObsExceso: update()
+    Model-->>obsExceso: update()
     deactivate Model
     activate ObserverVelocidad
     ObserverVelocidad-->>+View: mostrarVelocidad(matricula, velocidad)
     deactivate ObserverVelocidad
-    activate ObsExceso
-    ObsExceso-->>+View: mostrarVelocidad2(matricula, velocidad)
-    deactivate ObsExceso
+    activate obsExceso
+    obsExceso-->>+View: mostrarVelocidad2(matricula, velocidad)
+    deactivate obsExceso
     deactivate Controller
     View-->>-Dialogo: crearDialogo(mensaje)
     
