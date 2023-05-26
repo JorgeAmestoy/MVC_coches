@@ -81,7 +81,7 @@ sequenceDiagram
     View-->>User: El coche se ha creado
     deactivate View
     
-    User-->>View: User quiere aumentar la velocidad
+    User-->>View: Aumenta la velocidad del coche
     activate View
     View-->>Controller: User quiere aumentar la velocidad
     activate Controller
@@ -96,7 +96,7 @@ sequenceDiagram
     View-->>User: El coche ha aumentado su velocidad
     deactivate View
     
-    User-->>View: User quiere reducir la velocidad
+    User-->>View: Reduce la velocidad del coche
     activate View
     View-->>Controller: User quiere reducir la velocidad
     activate Controller
@@ -108,7 +108,7 @@ sequenceDiagram
     ObserverVelocidad-->>+View: Muestra la velocidad
     deactivate ObserverVelocidad
     deactivate Controller
-    View-->>User: El coche ha reducido su velocidad!
+    View-->>User: El coche ha reducido su velocidad
     deactivate View
 ```
 
@@ -123,7 +123,7 @@ participant Controller
 participant ObserverVelocidad
 participant Model
 
-    User-->>IU: User quiere crear un coche
+    User-->>IU: Crea un coche
     IU-->Controller: crearCoche(modelo,matricula)
     activate Controller
     Controller->>Model: crearCoche(modelo, matricula)
@@ -134,7 +134,7 @@ participant Model
     deactivate Controller
     View-->>-Dialogo: crearDialogo(mensaje)
     
-    User-->>IU: User quiere subir la velocidad del coche
+    User-->>IU: Aumenta la velocidad del coche
     IU-->>Controller: aumentarVelocidad(matricula,velocidad)
     activate Controller
     Controller->>Model: aumentarVelocidad(matricula,velocidad)
@@ -147,7 +147,7 @@ participant Model
     deactivate Controller
     View-->>-Dialogo: crearDialogo(mensaje)
     
-    User-->>IU: User quiere bajar la velocidad del coche
+    User-->>IU: Reduce la velocidad del coche
     IU-->>Controller: reducirVelocidad(matricula,velocidad)
     activate Controller
     Controller->>Model: reducirVelocidad(matricula,velocidad)
