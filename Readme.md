@@ -45,7 +45,11 @@ classDiagram
       class ObserverVelocidad {
       +update()
       }
+      class ObsExceso{
+      update()
+      }
     Controller "1" *-- "1" ObserverVelocidad : association
+    Controller "1" *-- "1" ObsExceso : association
     Controller "1" *-- "1" Model : association
     Controller "1" *-- "1" View : association
     Model "1" *-- "1..n" Coche : association
@@ -66,6 +70,7 @@ sequenceDiagram
     participant View
     participant Controller
     participant ObserverVelocidad
+    participant ObsExceso
     participant Model
     
     User-->>View: Crea un coche
@@ -89,11 +94,19 @@ sequenceDiagram
     activate Model
     Model-->>ObserverVelocidad: Notificación de aumento de velocidad
     deactivate Model
+    activate Model
+    Model-->>ObsExceso: Notificación de aumento de velocidad
+    deactivate Model
     activate ObserverVelocidad
     ObserverVelocidad-->>+View: Muestra la velocidad
     deactivate ObserverVelocidad
+    activate ObsExceso
+    ObsExceso-->>+View: Muestra la velocidad
+    deactivate ObsExceso
     deactivate Controller
     View-->>User: El coche ha aumentado su velocidad
+    deactivate View
+    View-->>User: Te has pasado!!
     deactivate View
     
     User-->>View: Reduce la velocidad del coche
@@ -121,6 +134,7 @@ participant Dialogo
 participant View
 participant Controller
 participant ObserverVelocidad
+participant obsExceso
 participant Model
 
     User-->>IU: Crea un coche
@@ -141,9 +155,15 @@ participant Model
     activate Model
     Model-->>ObserverVelocidad: update()
     deactivate Model
+    activate Model
+    Model-->>ObsExceso: update()
+    deactivate Model
     activate ObserverVelocidad
     ObserverVelocidad-->>+View: mostrarVelocidad(matricula, velocidad)
     deactivate ObserverVelocidad
+    activate ObsExceso
+    ObsExceso-->>+View: mostrarVelocidad2(matricula, velocidad)
+    deactivate ObsExceso
     deactivate Controller
     View-->>-Dialogo: crearDialogo(mensaje)
     
