@@ -95,13 +95,6 @@ public class Model extends Observable {
 
     }
 
-    public void excederVelocidad(String matricula,Integer v){
-
-        getCoche(matricula).velocidad = getCoche(matricula).velocidad + v;
-
-
-    }
-
     /**
      * Metodo que me devuelve la velocidad según la matricula que escriba
      * @param matricula que escribo
